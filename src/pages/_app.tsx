@@ -7,6 +7,7 @@ import SideNavBar from "@/components/SideNavBar";
 import Toast from "@/components/Toast";
 import { ShowToastContext } from "@/context/ShowToastContext";
 import { useState } from "react";
+import { ParentFolderIdContext } from "@/context/ParentFolderIdContext";
 
 // Use of the <SessionProvider> is mandatory to allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
@@ -15,25 +16,30 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps<{ session: Session }>) {
   const [showToastMessage, setShowToastMessage] = useState();
+  const [parentFolderId, setParentFolderId] = useState();
   return (
     <SessionProvider session={session}>
-      <ShowToastContext.Provider
-        value={{ showToastMessage, setShowToastMessage }}
+      <ParentFolderIdContext.Provider
+        value={{ parentFolderId, setParentFolderId }}
       >
-        <div className="flex">
-          <SideNavBar />
-          <div
-            className="grid grid-cols-1
+        <ShowToastContext.Provider
+          value={{ showToastMessage, setShowToastMessage }}
+        >
+          <div className="flex">
+            <SideNavBar />
+            <div
+              className="grid grid-cols-1
         md:grid-cols-3 w-full"
-          >
-            <div className="col-span-2">
-              <Component {...pageProps} />
+            >
+              <div className="col-span-2">
+                <Component {...pageProps} />
+              </div>
+              <div className="bg-white p-5">Storage</div>
             </div>
-            <div className="bg-white p-5">Storage</div>
           </div>
-        </div>
-        {showToastMessage && <Toast message={showToastMessage}/>}
-      </ShowToastContext.Provider>
+          {showToastMessage && <Toast message={showToastMessage} />}
+        </ShowToastContext.Provider>
+      </ParentFolderIdContext.Provider>
     </SessionProvider>
   );
 }

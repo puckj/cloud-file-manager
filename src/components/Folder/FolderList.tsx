@@ -1,31 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import FolderItem from "./FolderItem";
+import { useRouter } from "next/router";
 
-function FolderList({folderList}:any) {
-  // const folderList = [
-  //   {
-  //     id: 1,
-  //     name: "Folder 1 to Test Big Text",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Folder 2",
-  //   },
-  // ];
+function FolderList({ folderList, isSubFolder = false }: any) {
+  const [activeFolder, setActiveFolder] = useState<string | null>(null);
+  const router = useRouter();
+
+  const onFolderClickHandle = (item: any) => {
+    console.log(item, "item");
+    setActiveFolder(item.id);
+    router.push({
+      pathname: "/folder/" + item.id,
+      query: {
+        name: item.name,
+      },
+    });
+  };
+
   return (
     <div className="p-5 mt-5 bg-white rounded-lg">
-      <h2
-        className="text-[17px] 
-      font-bold items-center"
-      >
-        Recent Folders
-        <span
-          className="float-right text-blue-400 
+      {isSubFolder === false && (
+        <h2 className="text-[17px] font-bold items-center">
+          Recent Folders
+          <span
+            className="float-right text-blue-400 
         font-normal text-[13px]"
-        >
-          View All
-        </span>
-      </h2>
+          >
+            View All
+          </span>
+        </h2>
+      )}
+
       <div
         className="grid grid-cols-2
       md:grid-cols-3
@@ -34,7 +39,9 @@ function FolderList({folderList}:any) {
       gap-4"
       >
         {folderList.map((item, index) => (
-          <FolderItem folder={item} key={index} />
+          <div onClick={() => onFolderClickHandle(item)} key={index}>
+            <FolderItem folder={item} />
+          </div>
         ))}
       </div>
     </div>
