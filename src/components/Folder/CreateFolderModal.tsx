@@ -1,13 +1,16 @@
 import { db } from "@/config/FirebaseConfig";
+import { ShowToastContext } from "@/context/ShowToastContext";
 import { doc, setDoc } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 function CreateFolderModal() {
   const [folderName, setFolderName] = useState("");
   const docId = Date.now().toString();
   const { data: session } = useSession();
+  const { showToastMessage, setShowToastMessage } =
+    useContext(ShowToastContext);
 
   const onCreateHandle = async () => {
     // console.log(folderName);
@@ -17,6 +20,7 @@ function CreateFolderModal() {
         id: docId,
         createBy: session?.user?.email,
       });
+      setShowToastMessage("Folder Created!");
     } catch (error) {
       console.error(error, " setDoc - Folders [ERORR]");
     }

@@ -1,29 +1,17 @@
 import React from "react";
 import FolderItem from "./FolderItem";
 
-function FolderList() {
-  const folderList = [
-    {
-      id: 1,
-      name: "Folder 1 to Test Big Text",
-    },
-    {
-      id: 2,
-      name: "Folder 2",
-    },
-    {
-      id: 3,
-      name: "Folder 3",
-    },
-    {
-      id: 4,
-      name: "Folder 4",
-    },
-    {
-      id: 5,
-      name: "Folder 4",
-    },
-  ];
+function FolderList({folderList}:any) {
+  // const folderList = [
+  //   {
+  //     id: 1,
+  //     name: "Folder 1 to Test Big Text",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Folder 2",
+  //   },
+  // ];
   return (
     <div className="p-5 mt-5 bg-white rounded-lg">
       <h2
