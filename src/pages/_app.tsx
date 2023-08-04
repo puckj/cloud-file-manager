@@ -8,6 +8,7 @@ import Toast from "@/components/Toast";
 import { ShowToastContext } from "@/context/ShowToastContext";
 import { useState } from "react";
 import { ParentFolderIdContext } from "@/context/ParentFolderIdContext";
+import Storage from "@/components/Storage/Storage";
 
 // Use of the <SessionProvider> is mandatory to allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
@@ -34,7 +35,12 @@ export default function App({
               <div className="col-span-2">
                 <Component {...pageProps} />
               </div>
-              <div className="bg-white p-5">Storage</div>
+              <div
+                className="bg-white p-5 
+              order-first md:order-last"
+              >
+                <Storage />
+              </div>
             </div>
           </div>
           {showToastMessage && <Toast message={showToastMessage} />}
