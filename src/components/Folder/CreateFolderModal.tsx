@@ -19,7 +19,7 @@ function CreateFolderModal() {
   const onCreateHandle = async () => {
     console.log(parentFolderId,'parentFolderId');
     try {
-      await setDoc(doc(db, "Folders", docId), {
+      await setDoc(doc(db, "folders", docId), {
         name: folderName,
         id: docId,
         createBy: session?.user?.email,
@@ -27,7 +27,7 @@ function CreateFolderModal() {
       });
       setShowToastMessage("Folder Created!");
     } catch (error) {
-      console.error(error, " setDoc - Folders [ERORR]");
+      console.error(error, " setDoc - folders [ERORR]");
     }
     setFolderName("");
   };

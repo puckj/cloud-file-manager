@@ -22,8 +22,7 @@ function FolderDetails() {
   useEffect(() => {
     setParentFolderId(folderId);
     console.log(showToastMessage, session, "showToastMessage 555");
-    if (session && showToastMessage !== null) {
-      console.log("do it");
+    if (session) {
       getSubFolderList();
     }
   }, [folderId, session, showToastMessage]);
@@ -31,7 +30,7 @@ function FolderDetails() {
   const getSubFolderList = async () => {
     setSubFolderList([]);
     const q = query(
-      collection(db, "Folders"),
+      collection(db, "folders"),
       where("createBy", "==", session?.user?.email),
       where("parentFolderId", "==", folderId)
     );

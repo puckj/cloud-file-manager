@@ -34,7 +34,7 @@ export default function Home() {
   const getFolderList = async () => {
     setFolderList([]);
     const q = query(
-      collection(db, "Folders"),
+      collection(db, "folders"),
       where("parentFolderId", "==", 0),
       where("createBy", "==", session?.user?.email)
     );
