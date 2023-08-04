@@ -16,21 +16,22 @@ function UploadFileModal({ closeModal }) {
     useContext(ShowToastContext);
 
   const onFileUpload = async (file) => {
-    console.log(file.lastModified);
+    // console.log(file.lastModified);
     const fileRef = ref(storage, "file/" + file.name);
     uploadBytes(fileRef, file).then((snapshot) => {
       console.log("Uploaded a blob or file! ", snapshot);
       getDownloadURL(fileRef).then(async (url) => {
         // Insert url into an <img> tag to "download"
         console.log(url, "imageDownload");
-        await setDoc(doc(db, "files", docId), {
+        await setDoc(doc(db, "files", docId.toString()), {
           name: file.name,
           type: file.name.split(".")[1],
           size: file.size,
           modifiedAt: file.lastModified,
-          createdBy: session?.user?.name,
+          createdBy: session?.user?.email,
           parentFolderId: parentFolderId,
           imageUrl: url,
+          id: docId,
         });
         closeModal();
         setShowToastMessage("File Uploaded Successfully!");

@@ -13,6 +13,7 @@ export default function Home() {
   const { data: session } = useSession();
   const router = useRouter();
   const [folderList, setFolderList] = useState<any>([]);
+  const [fileList, setFileList] = useState<any>([]);
   const { parentFolderId, setParentFolderId } = useContext(
     ParentFolderIdContext
   );
@@ -24,8 +25,9 @@ export default function Home() {
     if (!session) {
       router.push("/login");
     } else {
-      console.log(showToastMessage, "showToastMessage");
+      // console.log(showToastMessage, "showToastMessage");
       getFolderList();
+      getFileList();
       // console.log("user session = > +++", session);
     }
     setParentFolderId(0);
@@ -46,11 +48,26 @@ export default function Home() {
     });
   };
 
+  const getFileList = async () => {
+    setFileList([]);
+    const q = query(
+      collection(db, "files"),
+      where("parentFolderId", "==", 0),
+      where("createdBy", "==", session?.user?.email)
+    );
+    const querySnapshot = await getDocs(q);    
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      // console.log(doc.id, " => ", doc.data());
+      setFileList((prevFileList: any) => [...prevFileList, doc.data()]);
+    });
+  };
+
   return (
     <div className="p-5">
       <SearchBar />
       <FolderList folderList={folderList} />
-      <FileList />
+      <FileList fileList={fileList} />
     </div>
   );
 }
