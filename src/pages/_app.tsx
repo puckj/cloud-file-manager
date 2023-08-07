@@ -35,10 +35,7 @@ export default function App({
               <div className="col-span-2">
                 <Component {...pageProps} />
               </div>
-              <div
-                className="bg-white p-5 
-              order-first md:order-last"
-              >
+              <div className="order-first md:order-last">
                 <Storage />
               </div>
             </div>
