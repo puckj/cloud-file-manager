@@ -1,15 +1,26 @@
+# Cloud File Manager
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+### Technologies
+- Next.js 13.4
+- TailwindCSS
+- DaisyUI
+- NextAuth.js (Gmail login)
+- Firebase (Cloud Firestore + Storage)
 
-First, run the development server:
+### Installation & Run
+
+2. `yarn install` then `yarn run dev`
+
+## Getting Started
+1. `cd cloud-file-manager` and Create `.env.local` file
+2. install packages and run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+yarn install
+
+#then
+yarn run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
