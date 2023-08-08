@@ -8,10 +8,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - NextAuth.js (Gmail login)
 - Firebase (Cloud Firestore + Storage)
 
-### Installation & Run
-
-2. `yarn install` then `yarn run dev`
-
 ## Getting Started
 1. `cd cloud-file-manager` and Create `.env.local` file
 2. install packages and run the development server:
